@@ -22,6 +22,7 @@ class Application extends \ArrayObject implements HttpKernelInterface {
     else {
       if(is_readable($source)) $this["config"] = include($source);
     }
+    \Config::set($this["config"]);
   }
   
   
