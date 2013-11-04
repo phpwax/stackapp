@@ -27,7 +27,7 @@ class Application extends \ArrayObject implements HttpKernelInterface {
   
   
   protected function route($request) {
-    $_GET["route"] = ltrim($request->getRequestUri(), "/");
+    $_GET["route"] = ltrim($request->getBaseUrl().$request->getPathInfo(), "/");
   }
   
   protected function configure() {
