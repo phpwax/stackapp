@@ -39,7 +39,7 @@ class Application extends \ArrayObject implements HttpKernelInterface {
     if(isset($this["config"]["db.socket"]) && strlen($this["config"]["db.socket"])>2) {
       $dsn="{$this["config"]["db.driver"]}:unix_socket={$this["config"]["db.socket"]};}";
     } else {
-      $dsn="{$this["config"]["db.driver"]}:host={$this["config"]["db.host"]}}";
+      $dsn="{$this["config"]["db.driver"]}:host={$this["config"]["db.host"]}";
     }
     $pdo = new \PDO( $dsn, $this["config"]["db.user"] , $this["config"]["db.password"] );
     $statement = $pdo->query("CREATE SCHEMA IF NOT EXISTS {$this["config"]["db.dbname"]};");
