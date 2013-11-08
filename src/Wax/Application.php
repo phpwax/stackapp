@@ -7,6 +7,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 class Application extends \ArrayObject implements HttpKernelInterface {
 
+
+  public function __construct($config) {
+    if($confg) $this->setConfig($config);
+  }
+
     
   public function handle(Request $request, $type = HttpKernelInterface::MASTER_REQUEST, $catch = true) {
     $this->configure();
