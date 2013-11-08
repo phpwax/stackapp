@@ -9,7 +9,7 @@ class Application extends \ArrayObject implements HttpKernelInterface {
 
 
   public function __construct($config) {
-    if($confg) $this->setConfig($config);
+    if($config) $this->setConfig($config);
   }
 
     
