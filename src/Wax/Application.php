@@ -41,7 +41,8 @@ class Application extends \ArrayObject implements HttpKernelInterface {
       "host"=>      $this["config"]["db.host"],
       "database"=>  $this["config"]["db.dbname"],
       "username"=>  $this["config"]["db.user"],
-      "password"=>  $this["config"]["db.password"]
+      "password"=>  $this["config"]["db.password"],
+      "socket"=>    $this["config"]["db.socket"]
     ]);
     
   }
