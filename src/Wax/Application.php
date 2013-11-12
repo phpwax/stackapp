@@ -44,16 +44,22 @@ class Application extends \ArrayObject implements HttpKernelInterface {
     $pdo = new \PDO( $dsn, $this["config"]["db.user"] , $this["config"]["db.password"] );
     $statement = $pdo->query("CREATE SCHEMA IF NOT EXISTS {$this["config"]["db.dbname"]};");
 
-
-    \WaxModel::load_adapter([
-      "dbtype"=>    $this["config"]["db.driver"],
-      "host"=>      $this["config"]["db.host"],
-      "database"=>  $this["config"]["db.dbname"],
-      "username"=>  $this["config"]["db.user"],
-      "password"=>  $this["config"]["db.password"],
-      "socket"=>    $this["config"]["db.socket"]
-    ]);
+    $this->config = $this->compat($this["config"]);
+    \WaxModel::load_adapter($this->config["db"]);
     
+  }
+
+  /*** This is is bit horrible but a load of old Wax apps depend on non-namespaced values, so this method
+  *    serves as a thin mapping layer to make the values available in old and new style.
+  */
+  protected function compat($config) {
+    $config["db"]["dbtype"]      ?: $config["db.driver"];
+    $config["db"]["host"]        ?: $config["db.host"];
+    $config["db"]["database"]    ?: $config["db.dbname"];
+    $config["db"]["username"]    ?: $config["db.user"];
+    $config["db"]["password"]    ?: $config["db.password"];
+    $config["db"]["socket"]      ?: $config["db.socket"];
+    return $config;
   }
 
 }
