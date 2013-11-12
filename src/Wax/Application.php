@@ -38,7 +38,7 @@ class Application extends \ArrayObject implements HttpKernelInterface {
   protected function configure() {
     if(isset($this["config"]["db.socket"]) && strlen($this["config"]["db.socket"])>2) {
       $dsn="{$this["config"]["db.driver"]}:unix_socket={$this["config"]["db.socket"]};}";
-    } else {
+    } elseif(isset($this["config"]["db.host"])) {
       $dsn="{$this["config"]["db.driver"]}:host={$this["config"]["db.host"]}";
     }
     $pdo = new \PDO( $dsn, $this["config"]["db.user"] , $this["config"]["db.password"] );
