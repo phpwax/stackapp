@@ -41,9 +41,10 @@ class Application extends \ArrayObject implements HttpKernelInterface {
     } elseif(isset($this["config"]["db.host"])) {
       $dsn="{$this["config"]["db.driver"]}:host={$this["config"]["db.host"]}";
     }
-    $pdo = new \PDO( $dsn, $this["config"]["db.user"] , $this["config"]["db.password"] );
-    $statement = $pdo->query("CREATE SCHEMA IF NOT EXISTS {$this["config"]["db.dbname"]};");
-
+    if($dsn) {
+      $pdo = new \PDO( $dsn, $this["config"]["db.user"] , $this["config"]["db.password"] );
+      $statement = $pdo->query("CREATE SCHEMA IF NOT EXISTS {$this["config"]["db.dbname"]};");
+    }
     $this->config = $this->compat($this["config"]);
     \WaxModel::load_adapter($this->config["db"]);
     
