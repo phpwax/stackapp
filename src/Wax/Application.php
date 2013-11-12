@@ -37,7 +37,7 @@ class Application extends \ArrayObject implements HttpKernelInterface {
   
   protected function configure() {
     $this["config"] = $this->compat($this["config"]);
-    \WaxModel::load_adapter($this->config["db"]);
+    \WaxModel::load_adapter($this["config"]["db"]);
     
   }
 
