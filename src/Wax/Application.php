@@ -41,16 +41,16 @@ class Application extends \ArrayObject implements HttpKernelInterface {
     
   }
 
-  /*** This is is bit horrible but a load of old Wax apps depend on non-namespaced values, so this method
+ /*** This is is bit horrible but a load of old Wax apps depend on non-namespaced values, so this method
   *    serves as a thin mapping layer to make the values available in old and new style.
   */
   protected function compat($config) {
-    $config["db"]["dbtype"]      ?: $config["db.driver"];
-    $config["db"]["host"]        ?: $config["db.host"];
-    $config["db"]["database"]    ?: $config["db.dbname"];
-    $config["db"]["username"]    ?: $config["db.user"];
-    $config["db"]["password"]    ?: $config["db.password"];
-    $config["db"]["socket"]      ?: $config["db.socket"];
+    $config["db"]["dbtype"]   = $config["db"]["dbtype"]      ?: $config["db.driver"];
+    $config["db"]["host"]     = $config["db"]["host"]        ?: $config["db.host"];
+    $config["db"]["database"] = $config["db"]["database"]    ?: $config["db.dbname"];
+    $config["db"]["username"] = $config["db"]["username"]    ?: $config["db.user"];
+    $config["db"]["password"] = $config["db"]["password"]    ?: $config["db.password"];
+    $config["db"]["socket"]   = $config["db"]["socket"]      ?: $config["db.socket"];
     return $config;
   }
 
