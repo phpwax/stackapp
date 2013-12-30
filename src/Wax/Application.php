@@ -8,11 +8,11 @@ use Symfony\Component\HttpFoundation\Response;
 class Application extends \ArrayObject implements HttpKernelInterface {
 
 
-  public function __construct($config) {
+  public function __construct($config = false) {
     if($config) $this->setConfig($config);
   }
 
-    
+
   public function handle(Request $request, $type = HttpKernelInterface::MASTER_REQUEST, $catch = true) {
     $this->configure();
     $this->route($request);
@@ -29,16 +29,16 @@ class Application extends \ArrayObject implements HttpKernelInterface {
     }
     \Config::set($this["config"]);
   }
-  
-  
+
+
   protected function route($request) {
     $_GET["route"] = ltrim($request->getBaseUrl().$request->getPathInfo(), "/");
   }
-  
+
   protected function configure() {
     $this["config"] = $this->compat($this["config"]);
     \WaxModel::load_adapter($this["config"]["db"]);
-    
+
   }
 
  /*** This is is bit horrible but a load of old Wax apps depend on non-namespaced values, so this method
